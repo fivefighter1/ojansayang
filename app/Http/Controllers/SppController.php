@@ -36,11 +36,15 @@ class SppController extends Controller
         return view('spp.index',['adminSpp' => $adminSpp]);
 
     }
-    public function buktiPembayaran(Request $request,$id_spp_admin,$id_user){
+    public function indexaja(Request $request){
+                $adminSpp = Spp::all();
+                return view('spp.index',['adminSpp' => $adminSpp]);
+            }
+    public function buktiPembayaran(Request $request,$id_spp_admin){
         $adminSpp = Spp::all();
         $bukti_pembayaran = Spp::find($id_spp_admin);
         if ($request->hasFile('bukti_pembayaran')) {
-            $bukti = $request->file('file_kegiatan');
+            $bukti = $request->file('bukti_pembayaran');
             $name =  '.' . $bukti->getClientOriginalExtension();
             $destinationPath = public_path('assets/filePembayaran');
             $bukti->move($destinationPath, $name);
@@ -54,9 +58,8 @@ class SppController extends Controller
             ->update([
                 'bukti_pembayaran' => $bukti_pembayaran
             ]);
-        $id = Session::get($id_user);
-
-        return redirect('/buktiPembayaran/'.$id);
+        
+        return redirect('/spp');
     }
     public function exportSpp($id_user){
         return Excel::download(new sppExport($id_user),'sppExport.xlsx');

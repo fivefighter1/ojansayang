@@ -2,7 +2,7 @@
 
 @section('container')
     <?php
-        $id = Session::get('id_user');
+        $id_user = Session::get('id_user');
     ?>
     <div class="main">
         <!-- MAIN CONTENT -->
@@ -14,7 +14,7 @@
                     </div>
                     <div class="panel-body">
                         @foreach($adminSpp as $data2)
-                        <form action="/buktiPembayaran/{{$data2 -> id_spp_admin}}" method="POST">
+                        <form action="/buktiPembayaran/{{$data2->id}}" method="POST">
                             @endforeach
                             @method('post')
                             {{ csrf_field() }}
@@ -46,7 +46,7 @@
                             </tr>
                             </tbody>
                            <div>
-                               <a href="{{ url('/export/'.$id) }}">Export</a>
+                               <a href="{{ url('/export/'.$id_user) }}">Export</a>
                            </div>
 
                         </table>

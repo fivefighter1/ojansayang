@@ -47,6 +47,7 @@ Route::group(['middleware' => 'CheckLoginMiddleware'], function() {
     // SPP
     //--Siswa
     Route::get('/spp/{id_user}', 'SppController@index');
+    Route::get('/spp', 'SppController@indexaja');
     Route::post('/buktiPembayaran/{id_spp_admin}','SppController@buktiPembayaran');
     //--Admin
     Route::get('/kelolaSppSiswa/{id_user}','SppController@viewSpp');
